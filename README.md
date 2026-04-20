@@ -101,11 +101,6 @@ A Liga será responsável por:
 
 ---
 
-## 📚 Referência
-
-O professor **Hilson** fornecerá um protótipo funcional como base para o desenvolvimento do sistema final.
-
----
 
 ## 🚀 Status
 
