@@ -38,5 +38,5 @@ Os dados são consumidos por uma aplicação web em **Vue 3**, exibidos em um da
 - JavaScript / TypeScript
 - CSS modular (component-based)
 
----
+
 
