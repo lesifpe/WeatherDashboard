@@ -1,0 +1,318 @@
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Exo+2:wght@300;400;600;700;800&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =========================
+   BASE SYSTEM
+========================= */
+@layer base {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: 'Exo 2', sans-serif;
+    background: #040d1a;
+    background-image:
+      radial-gradient(ellipse at 20% 10%, rgba(0, 200, 255, 0.05) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 90%, rgba(123, 47, 255, 0.05) 0%, transparent 50%),
+      linear-gradient(rgba(0, 200, 255, 0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 200, 255, 0.025) 1px, transparent 1px);
+    background-size: 100% 100%, 100% 100%, 40px 40px, 40px 40px;
+    color: #c8dff5;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background: rgba(0, 245, 255, 0.2);
+    color: #fff;
+  }
+
+  /* Scroll */
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #020912;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(0, 245, 255, 0.3);
+    border-radius: 0;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 245, 255, 0.55);
+  }
+}
+
+/* =========================
+   DESIGN SYSTEM
+========================= */
+@layer components {
+
+ 
+  /* CARD PADRÃO */
+  .card {
+    background: rgba(4, 16, 35, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-top: 2px solid rgba(0, 245, 255, 0.4);
+    border-radius: 4px;
+    padding: 18px;
+    transition: all 0.3s ease;
+    position: relative;
+    backdrop-filter: blur(8px);
+  }
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #00f5ff, transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  .card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(0, 245, 255, 0.18);
+    box-shadow:
+      0 0 20px rgba(0, 200, 255, 0.06),
+      0 12px 30px rgba(0, 0, 0, 0.4);
+  }
+  .card:hover::before {
+    opacity: 1;
+  }
+
+  /* MINI CARD */
+  .mini-card {
+    background: rgba(0, 200, 255, 0.03);
+    border-radius: 3px;
+    padding: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: border-color 0.2s ease, background 0.2s ease;
+  }
+  .mini-card:hover {
+    background: rgba(0, 200, 255, 0.06);
+    border-color: rgba(0, 245, 255, 0.15);
+  }
+
+  /* BOTÃO PADRÃO */
+  .btn {
+    font-family: 'Share Tech Mono', monospace;
+    background: transparent;
+    color: #00f5ff;
+    padding: 8px 18px;
+    border-radius: 2px;
+    border: 1px solid rgba(0, 245, 255, 0.4);
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 400;
+    transition: all 0.2s ease;
+    cursor: pointer;
+  }
+  .btn:hover {
+    background: rgba(0, 245, 255, 0.1);
+    border-color: #00f5ff;
+    box-shadow: 0 0 12px rgba(0, 245, 255, 0.2);
+  }
+  .btn-primary {
+    background: rgba(0, 245, 255, 0.1);
+    border-color: #00f5ff;
+  }
+  .btn-danger {
+    color: #ff2d55;
+    border-color: rgba(255, 45, 85, 0.4);
+  }
+  .btn-danger:hover {
+    background: rgba(255, 45, 85, 0.1);
+    border-color: #ff2d55;
+    box-shadow: 0 0 12px rgba(255, 45, 85, 0.2);
+  }
+
+  /* BADGES */
+  .badge {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.65rem;
+    padding: 3px 10px;
+    border-radius: 2px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #5b89ab;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .badge-live {
+    background: rgba(0, 255, 159, 0.08);
+    border-color: rgba(0, 255, 159, 0.35);
+    color: #00ff9f;
+    box-shadow: 0 0 6px rgba(0, 255, 159, 0.15);
+  }
+  .badge-danger {
+    background: rgba(255, 45, 85, 0.08);
+    border-color: rgba(255, 45, 85, 0.35);
+    color: #ff2d55;
+    box-shadow: 0 0 6px rgba(255, 45, 85, 0.15);
+  }
+  .badge-warning {
+    background: rgba(255, 224, 102, 0.08);
+    border-color: rgba(255, 224, 102, 0.35);
+    color: #ffe066;
+  }
+
+  /* LAYOUT HELPERS */
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  .grid {
+    display: grid;
+    gap: 12px;
+  }
+
+  /* TEAM */
+  .team-card {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    border-radius: 3px;
+    background: rgba(0, 200, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: border-color 0.2s ease;
+  }
+  .team-card:hover {
+    border-color: rgba(0, 245, 255, 0.15);
+  }
+  .avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 2px;
+    border: 1px solid rgba(0, 245, 255, 0.3);
+    background: rgba(0, 245, 255, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Share Tech Mono', monospace;
+    font-weight: 700;
+    color: #00f5ff;
+    font-size: 0.85rem;
+  }
+
+  /* METRICS */
+  .metric {
+    background: rgba(0, 200, 255, 0.03);
+    padding: 10px;
+    border-radius: 3px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    text-align: center;
+  }
+  .metric-value {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #00f5ff;
+    text-shadow: 0 0 8px rgba(0, 245, 255, 0.5);
+  }
+
+  /* LIVE INDICATOR */
+  .live {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'Share Tech Mono', monospace;
+    color: #00ff9f;
+    font-size: 0.75rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+  .live::before {
+    content: '';
+    width: 7px;
+    height: 7px;
+    background: #00ff9f;
+    border-radius: 50%;
+    box-shadow: 0 0 6px #00ff9f;
+    animation: pulse 1.2s infinite;
+  }
+
+  /* DIVISOR / LINHA DECORATIVA */
+  .divider-neon {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(0, 245, 255, 0.3), transparent);
+    border: none;
+    margin: 1rem 0;
+  }
+
+  /* TEXTO COM GLOW */
+  .text-neon {
+    color: #00f5ff;
+    text-shadow: 0 0 10px rgba(0, 245, 255, 0.6);
+  }
+  .text-mono {
+    font-family: 'Share Tech Mono', monospace;
+  }
+  .text-muted {
+    color: rgba(91, 163, 201, 0.5);
+  }
+}
+
+/* =========================
+   ANIMATIONS
+========================= */
+@layer utilities {
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0.3; }
+  }
+
+  @keyframes scanline {
+    0%   { top: -4px; }
+    100% { top: 100vh; }
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0; }
+  }
+
+  @keyframes glow-pulse {
+    0%, 100% { box-shadow: 0 0 6px rgba(0, 245, 255, 0.3); }
+    50%       { box-shadow: 0 0 18px rgba(0, 245, 255, 0.7); }
+  }
+
+  .fade-in        { animation: fadeInUp 0.5s ease-out; }
+  .fade-in-down   { animation: fadeInDown 0.5s ease-out; }
+  .pulse          { animation: pulse 1.5s infinite; }
+  .blink          { animation: blink 1s infinite; }
+  .glow-pulse     { animation: glow-pulse 2s infinite; }
+}
+
+/* =========================
+   RESPONSIVO
+========================= */
+@media (max-width: 768px) {
+  .container {
+    padding: 12px;
+  }
+  .card {
+    padding: 14px;
+  }
+}
