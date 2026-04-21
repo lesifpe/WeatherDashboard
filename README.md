@@ -40,20 +40,3 @@ Os dados são consumidos por uma aplicação web em **Vue 3**, exibidos em um da
 
 ---
 
-## 🏗️ Estrutura do Projeto
-
-```bash
-src/
-│
-├── components/
-│   ├── Dashboard.vue        # Painel principal do sistema
-│   ├── EquipeCard.vue       # Cards de equipes
-│   └── WeatherChart.vue     # Gráficos meteorológicos
-│
-├── firebase/
-│   └── config.js            # Configuração do Firebase
-│
-├── models/
-│   └── index.ts             # Tipagens e estruturas de dados
-│
-└── main.ts                  # Entry point da aplicação
