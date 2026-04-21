@@ -1,46 +1,59 @@
-# 📡 ESP32 + Firebase Realtime Dashboard
+# 🌦️ Weather Dashboard Vue (ESP32 + Firebase + Vue 3)
 
-Sistema de monitoramento em tempo real utilizando **ESP32** e **Firebase Realtime Database**, com visualização em um dashboard web.
+Sistema de monitoramento meteorológico em tempo real baseado em **ESP32 + Firebase Realtime Database**, com dashboard web moderno desenvolvido em **Vue 3 + Vite**.
 
 ---
 
 ## 📌 Visão Geral
 
-O projeto coleta dados de sensores (temperatura e chuva) via ESP32 e envia para o Firebase.  
-Uma aplicação web consome esses dados e exibe em um dashboard interativo.
+Este projeto coleta dados ambientais (como temperatura, chuva e outras métricas de sensores IoT via **ESP32**) e envia para o **Firebase Realtime Database**.
+
+Os dados são consumidos por uma aplicação web em **Vue 3**, exibidos em um dashboard interativo com atualização em tempo real.
 
 ---
 
 ## 🎯 Funcionalidades
 
-- 📡 Coleta de dados via ESP32  
-- ☁️ Envio em tempo real para o Firebase  
-- 📈 Dashboard com atualização automática  
-- 👥 Visualização separada por equipes  
+- 📡 Integração com ESP32 (IoT / sensores)
+- ☁️ Envio de dados em tempo real via Firebase Realtime Database
+- 📊 Dashboard interativo com atualização dinâmica
+- 📈 Visualização gráfica de dados meteorológicos
+- 👥 Suporte a visualização por equipes (arquitetura modular)
+- ⚡ Interface reativa com Vue 3 + Vite
 
 ---
 
-## 🧩 Tecnologias
+## 🧩 Tecnologias Utilizadas
 
-- **Hardware:** ESP32, sensores  
-- **Backend:** Firebase Realtime Database  
-- **Frontend:** HTML, CSS, TypeScript (React opcional)  
+### 🔌 Hardware
+- ESP32
+- Sensores meteorológicos (temperatura, chuva, umidade, etc.)
+
+### ☁️ Backend / Realtime
+- Firebase Realtime Database
+
+### 💻 Frontend
+- Vue 3
+- Vite
+- JavaScript / TypeScript
+- CSS modular (component-based)
 
 ---
 
-## 👥 Estrutura
+## 🏗️ Estrutura do Projeto
 
-O sistema é dividido em equipes, cada uma com:
-
-- Um ESP32  
-- Um Firebase independente  
-- Um fluxo de dados isolado  
-
----
-
-## 🚀 Como executar
-
-### 1. Clonar o repositório
 ```bash
-git clone https://github.com/lesifpe/mestrado-sensor-dashboard.git
-cd mestrado-sensor-dashboard
+src/
+│
+├── components/
+│   ├── Dashboard.vue        # Painel principal do sistema
+│   ├── EquipeCard.vue       # Cards de equipes
+│   └── WeatherChart.vue     # Gráficos meteorológicos
+│
+├── firebase/
+│   └── config.js            # Configuração do Firebase
+│
+├── models/
+│   └── index.ts             # Tipagens e estruturas de dados
+│
+└── main.ts                  # Entry point da aplicação
