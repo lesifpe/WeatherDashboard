@@ -20,7 +20,7 @@
       <div class="header-center">
         <h1 class="dashboard-title">
           <span class="title-bracket">[</span>
-          SISTEMA DE MONITORAMENTO METEOROLÓGICO
+          SISTEMA DE MONITORAMENTO METROPOLITANO
           <span class="title-bracket">]</span>
         </h1>
         <div class="subtitle-row">
@@ -73,7 +73,6 @@
     <footer class="dashboard-footer">
       <div class="footer-line"></div>
       <div class="footer-content">
-        <span class="footer-copy">© 2024 INSTITUTO FEDERAL — SISTEMA DE MONITORAMENTO METEOROLÓGICO</span>
         <span class="footer-note">DADOS ATUALIZADOS EM TEMPO REAL VIA FIREBASE REALTIME DATABASE</span>
       </div>
     </footer>

@@ -10,12 +10,12 @@
       <div class="hero-content fade-in">
         <div class="hero-eyebrow">
           <span class="eyebrow-line"></span>
-          <span class="eyebrow-text">INSTITUTO FEDERAL // ESP32 IoT Network</span>
+          <span class="eyebrow-text">Pós-graduação em Sustentabilidade Urbana</span>
           <span class="eyebrow-line"></span>
         </div>
 
         <h1 class="hero-title">
-          Plataforma Meteorológica
+          Plataforma de Visualização
           <span class="title-accent">IoT</span>
         </h1>
 
@@ -41,9 +41,7 @@
           <span class="title-icon">◈</span> Sobre o Projeto
         </h2>
         <p class="section-text">
-          Plataforma desenvolvida para monitoramento climático em tempo real utilizando sensores IoT
-          conectados ao ESP32. Os dados são transmitidos para o Firebase e consumidos por um
-          dashboard web moderno.
+          Plataforma desenvolvida para validação de protótipos utilizando sensores IoT conectados ao ESP32, desenvolvidos no Componente Curricrular Conectividade e Monitoramento Metropolitano. Os dados são transmitidos para o Firebase e consumidos por um dashboard web moderno.
         </p>
       </section>
 
