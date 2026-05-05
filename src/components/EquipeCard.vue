@@ -1,16 +1,14 @@
+<!-- components/EquipeCard.vue -->
 <template>
   <div
     class="equipe-card"
     :class="{ 'test-mode': isTestMode }"
     :style="{ '--accent': equipeColor }"
   >
-    <!-- Canto decorativo -->
     <div class="corner tl"></div>
     <div class="corner tr"></div>
     <div class="corner bl"></div>
     <div class="corner br"></div>
-
-    <!-- Linha de acento superior -->
     <div class="accent-top"></div>
 
     <div class="card-header">
@@ -30,18 +28,13 @@
       </div>
       <div class="status-indicator">
         <span class="status-dot" :class="statusClass"></span>
-        <span class="status-text">{{ latestData?.statusSensor || 'INATIVO' }}</span>
+        <span class="status-text">{{ latestData?.statusSensor || 'ATIVO' }}</span>
       </div>
     </div>
 
     <div v-if="alerts.length > 0" class="alert-area">
-      <div
-        v-for="alert in alerts"
-        :key="alert.type"
-        class="alert"
-        :class="alert.severity"
-      >
-        <span class="alert-icon">{{ alert.severity === 'critical' ? '⚠' : '!' }}</span>
+      <div v-for="alert in alerts" :key="alert.type" class="alert" :class="alert.severity">
+        <span class="alert-icon">{{ alert.severity === 'critical' ? '⚠' : '⚠' }}</span>
         {{ alert.message }}
       </div>
     </div>
@@ -50,7 +43,7 @@
       <div class="metric-card" v-for="metric in metrics" :key="metric.label">
         <div class="metric-icon">{{ metric.icon }}</div>
         <div class="metric-value" :class="metric.valueClass">
-          {{ metric.value }}<span class="metric-unit">{{ metric.unit }}</span>
+          {{ formatValue(metric.value, metric.decimals) }}<span class="metric-unit">{{ metric.unit }}</span>
         </div>
         <div class="metric-label">{{ metric.label }}</div>
         <div class="metric-bar">
@@ -64,10 +57,7 @@
       {{ formatTimestamp(latestData?.timestamp) }}
     </div>
 
-    <WeatherChart
-      :data="historicalData.slice(0, 20)"
-      :chartType="currentChartType"
-    />
+    <WeatherChart :data="historicalData.slice(0, 24)" :chartType="currentChartType" />
 
     <div class="chart-buttons">
       <button
@@ -106,32 +96,95 @@ const { alerts, intensityClass, statusClass } = useAlertProcessor(
   computed(() => props.weatherData)
 );
 
+const formatValue = (value, decimals = 1) => {
+  if (value === undefined || value === null) return '0';
+  const num = parseFloat(value);
+  if (isNaN(num)) return '0';
+  return num.toFixed(decimals);
+};
+
 const metrics = computed(() => {
   const data = latestData.value;
   if (!data) return [];
+  
   return [
-    { icon: '🌧️', label: 'Intens. Chuva', value: data.intensidadeChuva || 0, unit: 'mm/h', valueClass: intensityClass.value, max: 50 },
-    { icon: '💧', label: 'Vol. Acumulado', value: data.volumeAcumulado || 0, unit: 'mm', valueClass: 'normal', max: 100 },
-    { icon: '💨', label: 'Umidade', value: data.umidade || 0, unit: '%', valueClass: 'normal', max: 100 },
-    { icon: '🌡️', label: 'Temperatura', value: data.temperatura || 0, unit: '°C', valueClass: 'normal', max: 50 },
-    { icon: '📊', label: 'Pressão', value: data.pressao || 0, unit: 'hPa', valueClass: 'normal', max: 1100 },
+    { 
+      icon: '🌧️', 
+      label: 'Intens. Chuva', 
+      value: data.chuvaIntensidade ?? data.intensidadeChuva ?? 0, 
+      unit: 'mm/h', 
+      valueClass: intensityClass.value, 
+      max: 50,
+      decimals: 1
+    },
+    { 
+      icon: '💧', 
+      label: 'Chuva Dia', 
+      value: data.chuvaDiaria ?? data.volumeAcumulado ?? 0, 
+      unit: 'mm', 
+      valueClass: 'normal', 
+      max: 100,
+      decimals: 1
+    },
+    { 
+      icon: '💨', 
+      label: 'Umidade', 
+      value: data.umidade ?? data.humidity ?? 0, 
+      unit: '%', 
+      valueClass: 'normal', 
+      max: 100,
+      decimals: 0
+    },
+    { 
+      icon: '🌡️', 
+      label: 'Temperatura', 
+      value: data.temperatura ?? data.temperature ?? 0, 
+      unit: '°C', 
+      valueClass: 'normal', 
+      max: 50,
+      decimals: 1
+    },
+    { 
+      icon: '📊', 
+      label: 'Pressão', 
+      value: data.pressao ?? data.pressure ?? 0, 
+      unit: 'hPa', 
+      valueClass: 'normal', 
+      max: 1100,
+      decimals: 0
+    },
+    { 
+      icon: '💨', 
+      label: 'Vento', 
+      value: data.velocidadeVento ?? data.windSpeed ?? 0, 
+      unit: 'km/h', 
+      valueClass: 'normal', 
+      max: 100,
+      decimals: 1
+    }
   ];
 });
 
 const chartButtons = [
   { type: 'rain', icon: '🌧️', label: 'Chuva' },
   { type: 'volume', icon: '💧', label: 'Volume' },
-  { type: 'climate', icon: '🌡️', label: 'Clima' },
+  { type: 'climate', icon: '🌡️', label: 'Clima' }
 ];
 
 const formatTimestamp = (timestamp) => {
   if (!timestamp) return 'N/A';
-  return new Date(timestamp).toLocaleString('pt-BR');
+  try {
+    const date = timestamp.toDate ? timestamp.toDate() : new Date(timestamp);
+    return date.toLocaleString('pt-BR');
+  } catch {
+    return new Date(timestamp).toLocaleString('pt-BR');
+  }
 };
 
 const getBarWidth = (metric) => {
   const val = parseFloat(metric.value) || 0;
-  return Math.min(100, Math.max(0, (val / metric.max) * 100));
+  const percentage = (val / metric.max) * 100;
+  return Math.min(100, Math.max(0, percentage));
 };
 </script>
 
@@ -154,17 +207,10 @@ const getBarWidth = (metric) => {
 
 .equipe-card:hover {
   transform: translateY(-4px);
-  box-shadow:
-    0 0 0 1px rgba(var(--accent-rgb, 0, 245, 255), 0.25),
-    0 12px 40px rgba(0, 0, 0, 0.5),
-    0 0 30px rgba(0, 200, 255, 0.06);
+  box-shadow: 0 0 0 1px rgba(0, 245, 255, 0.25), 0 12px 40px rgba(0, 0, 0, 0.5), 0 0 30px rgba(0, 200, 255, 0.06);
 }
 
-.test-mode {
-  border-color: rgba(255, 45, 85, 0.2) !important;
-}
-
-/* Linha de acento superior */
+.test-mode { border-color: rgba(255, 45, 85, 0.2) !important; }
 .accent-top {
   position: absolute;
   top: 0;
@@ -175,8 +221,6 @@ const getBarWidth = (metric) => {
   opacity: 0.9;
   box-shadow: 0 0 10px var(--accent);
 }
-
-/* Cantos decorativos */
 .corner {
   position: absolute;
   width: 10px;
@@ -190,7 +234,6 @@ const getBarWidth = (metric) => {
 .corner.bl { bottom: 4px; left: 4px; border-width: 0 0 1px 1px; }
 .corner.br { bottom: 4px; right: 4px; border-width: 0 1px 1px 0; }
 
-/* Header */
 .card-header {
   display: flex;
   justify-content: space-between;
@@ -199,13 +242,7 @@ const getBarWidth = (metric) => {
   padding-bottom: 0.85rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
-
-.header-title {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
+.header-title { display: flex; flex-direction: column; gap: 0.5rem; }
 .equipe-id {
   font-family: 'Share Tech Mono', monospace;
   font-size: 0.95rem;
@@ -213,18 +250,8 @@ const getBarWidth = (metric) => {
   letter-spacing: 1px;
   text-shadow: 0 0 10px var(--accent);
 }
-
-.id-bracket {
-  color: rgba(255, 255, 255, 0.25);
-  font-weight: 300;
-}
-
-.badges {
-  display: flex;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-}
-
+.id-bracket { color: rgba(255, 255, 255, 0.25); font-weight: 300; }
+.badges { display: flex; gap: 0.5rem; flex-wrap: wrap; }
 .test-badge {
   font-family: 'Share Tech Mono', monospace;
   background: rgba(255, 45, 85, 0.1);
@@ -236,7 +263,6 @@ const getBarWidth = (metric) => {
   letter-spacing: 1px;
   animation: blink-slow 2s infinite;
 }
-
 .connection-badge {
   display: flex;
   align-items: center;
@@ -250,7 +276,6 @@ const getBarWidth = (metric) => {
   font-size: 0.65rem;
   letter-spacing: 1px;
 }
-
 .connection-dot {
   width: 5px;
   height: 5px;
@@ -259,32 +284,10 @@ const getBarWidth = (metric) => {
   box-shadow: 0 0 4px #00ff9f;
   animation: pulse 1.2s infinite;
 }
-
-.status-indicator {
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  flex-shrink: 0;
-}
-
-.status-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-
-.status-active {
-  background: #00ff9f;
-  box-shadow: 0 0 8px #00ff9f;
-  animation: pulse 1.5s infinite;
-}
-
-.status-inactive {
-  background: #ff2d55;
-  box-shadow: 0 0 6px #ff2d55;
-}
-
+.status-indicator { display: flex; align-items: center; gap: 0.4rem; flex-shrink: 0; }
+.status-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.status-active { background: #00ff9f; box-shadow: 0 0 8px #00ff9f; animation: pulse 1.5s infinite; }
+.status-inactive { background: #ff2d55; box-shadow: 0 0 6px #ff2d55; }
 .status-text {
   font-family: 'Share Tech Mono', monospace;
   font-size: 0.7rem;
@@ -292,15 +295,7 @@ const getBarWidth = (metric) => {
   letter-spacing: 1px;
   text-transform: uppercase;
 }
-
-/* Alertas */
-.alert-area {
-  margin-bottom: 1rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-}
-
+.alert-area { margin-bottom: 1rem; display: flex; flex-direction: column; gap: 0.4rem; }
 .alert {
   display: flex;
   align-items: center;
@@ -312,18 +307,12 @@ const getBarWidth = (metric) => {
   letter-spacing: 0.5px;
   animation: slide-in 0.3s ease-out;
 }
-
-.alert-icon {
-  font-style: normal;
-}
-
 .alert.warning {
   background: rgba(255, 224, 102, 0.07);
   border: 1px solid rgba(255, 224, 102, 0.3);
   border-left: 3px solid #ffe066;
   color: #ffe066;
 }
-
 .alert.critical {
   background: rgba(255, 45, 85, 0.08);
   border: 1px solid rgba(255, 45, 85, 0.3);
@@ -331,15 +320,12 @@ const getBarWidth = (metric) => {
   color: #ff2d55;
   animation: shake 0.4s ease-out;
 }
-
-/* Métricas */
 .metrics-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
   gap: 0.75rem;
   margin-bottom: 1rem;
 }
-
 .metric-card {
   background: rgba(0, 200, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.05);
@@ -349,18 +335,8 @@ const getBarWidth = (metric) => {
   transition: background 0.25s ease, border-color 0.25s ease;
   cursor: default;
 }
-
-.metric-card:hover {
-  background: rgba(0, 200, 255, 0.07);
-  border-color: rgba(0, 245, 255, 0.15);
-}
-
-.metric-icon {
-  font-size: 1.15rem;
-  margin-bottom: 0.35rem;
-  line-height: 1;
-}
-
+.metric-card:hover { background: rgba(0, 200, 255, 0.07); border-color: rgba(0, 245, 255, 0.15); }
+.metric-icon { font-size: 1.15rem; margin-bottom: 0.35rem; line-height: 1; }
 .metric-value {
   font-family: 'Share Tech Mono', monospace;
   font-size: 1.15rem;
@@ -369,18 +345,10 @@ const getBarWidth = (metric) => {
   margin-bottom: 0.35rem;
   color: #00f5ff;
 }
-
 .metric-value.normal { color: var(--accent); text-shadow: 0 0 8px var(--accent); }
 .metric-value.warning { color: #ffe066; text-shadow: 0 0 8px #ffe066; animation: pulse-slow 1.2s infinite; }
 .metric-value.critical { color: #ff2d55; text-shadow: 0 0 8px #ff2d55; animation: blink-slow 0.6s infinite; }
-
-.metric-unit {
-  font-size: 0.6rem;
-  font-weight: 400;
-  margin-left: 1px;
-  opacity: 0.6;
-}
-
+.metric-unit { font-size: 0.6rem; font-weight: 400; margin-left: 2px; opacity: 0.6; }
 .metric-label {
   font-size: 0.6rem;
   color: rgba(200, 223, 245, 0.35);
@@ -388,14 +356,12 @@ const getBarWidth = (metric) => {
   letter-spacing: 0.5px;
   margin-bottom: 0.4rem;
 }
-
 .metric-bar {
   height: 2px;
   background: rgba(255, 255, 255, 0.06);
   border-radius: 1px;
   overflow: hidden;
 }
-
 .metric-bar-fill {
   height: 100%;
   border-radius: 1px;
@@ -403,11 +369,8 @@ const getBarWidth = (metric) => {
   background: var(--accent);
   box-shadow: 0 0 4px var(--accent);
 }
-
 .metric-bar-fill.warning { background: #ffe066; box-shadow: 0 0 4px #ffe066; }
 .metric-bar-fill.critical { background: #ff2d55; box-shadow: 0 0 4px #ff2d55; }
-
-/* Timestamp */
 .timestamp {
   display: flex;
   align-items: center;
@@ -422,21 +385,8 @@ const getBarWidth = (metric) => {
   margin-bottom: 0.85rem;
   letter-spacing: 0.5px;
 }
-
-.ts-prefix {
-  color: rgba(0, 245, 255, 0.4);
-  font-size: 0.6rem;
-  letter-spacing: 1.5px;
-}
-
-/* Botões de chart */
-.chart-buttons {
-  display: flex;
-  gap: 0.4rem;
-  margin-top: 0.75rem;
-  justify-content: center;
-}
-
+.ts-prefix { color: rgba(0, 245, 255, 0.4); font-size: 0.6rem; letter-spacing: 1.5px; }
+.chart-buttons { display: flex; gap: 0.4rem; margin-top: 0.75rem; justify-content: center; flex-wrap: wrap; }
 .chart-btn {
   display: flex;
   align-items: center;
@@ -453,57 +403,57 @@ const getBarWidth = (metric) => {
   text-transform: uppercase;
   transition: all 0.2s ease;
 }
-
 .chart-btn:hover {
   background: rgba(0, 245, 255, 0.07);
   border-color: rgba(0, 245, 255, 0.35);
   color: #00f5ff;
   box-shadow: 0 0 8px rgba(0, 245, 255, 0.1);
 }
-
 .chart-btn.active {
   background: rgba(0, 245, 255, 0.1);
   border-color: rgba(0, 245, 255, 0.5);
   color: #00f5ff;
   box-shadow: 0 0 10px rgba(0, 245, 255, 0.15);
 }
-
 .btn-icon { font-size: 0.8rem; }
 
-/* Animations */
-@keyframes fade-in-up {
-  from { opacity: 0; transform: translateY(16px); }
-  to { opacity: 1; transform: translateY(0); }
-}
+@keyframes fade-in-up { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.9); } }
+@keyframes pulse-slow { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
+@keyframes blink-slow { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+@keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-4px); } 75% { transform: translateX(4px); } }
+@keyframes slide-in { from { opacity: 0; transform: translateX(-8px); } to { opacity: 1; transform: translateX(0); } }
 
-@keyframes pulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.5; transform: scale(0.9); }
-}
-
-@keyframes pulse-slow {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.6; }
-}
-
-@keyframes blink-slow {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.3; }
-}
-
-@keyframes shake {
-  0%, 100% { transform: translateX(0); }
-  25% { transform: translateX(-4px); }
-  75% { transform: translateX(4px); }
-}
-
-@keyframes slide-in {
-  from { opacity: 0; transform: translateX(-8px); }
-  to { opacity: 1; transform: translateX(0); }
-}
-
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .equipe-card { padding: 1rem; }
-  .metrics-grid { grid-template-columns: repeat(2, 1fr); }
+  .metrics-grid { grid-template-columns: repeat(3, 1fr); }
+  .metric-value { font-size: 1rem; }
+}
+@media (max-width: 768px) {
+  .equipe-card { padding: 0.875rem; }
+  .metrics-grid { grid-template-columns: repeat(2, 1fr); gap: 0.5rem; }
+  .metric-card { padding: 0.5rem 0.35rem 0.4rem; }
+  .metric-icon { font-size: 1rem; }
+  .metric-value { font-size: 0.9rem; }
+  .metric-label { font-size: 0.55rem; }
+  .chart-btn { padding: 0.25rem 0.5rem; font-size: 0.65rem; }
+  .timestamp { font-size: 0.6rem; margin-bottom: 0.6rem; }
+}
+@media (max-width: 480px) {
+  .equipe-card { padding: 0.75rem; }
+  .card-header { flex-direction: column; gap: 0.5rem; }
+  .status-indicator { align-self: flex-end; }
+  .metrics-grid { grid-template-columns: repeat(2, 1fr); gap: 0.4rem; }
+  .metric-value { font-size: 0.85rem; }
+  .chart-buttons { gap: 0.3rem; }
+  .chart-btn { padding: 0.2rem 0.4rem; font-size: 0.6rem; }
+  .btn-icon { font-size: 0.7rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .equipe-card, .equipe-card:hover, .metric-bar-fill, .chart-btn, .alert {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+  }
 }
 </style>
