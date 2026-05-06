@@ -129,7 +129,7 @@ const metrics = computed(() => {
     { 
       icon: '💨', 
       label: 'Umidade', 
-      value: data.umidade ?? data.humidity ?? 0, 
+      value: data.dht_umidade ?? data.umidade ?? data.humidity ?? 0, 
       unit: '%', 
       valueClass: 'normal', 
       max: 100,
@@ -138,7 +138,7 @@ const metrics = computed(() => {
     { 
       icon: '🌡️', 
       label: 'Temperatura', 
-      value: data.temperatura ?? data.temperature ?? 0, 
+      value: data.dht_temperatura ?? data.temperatura ?? data.temperature ?? 0, 
       unit: '°C', 
       valueClass: 'normal', 
       max: 50,

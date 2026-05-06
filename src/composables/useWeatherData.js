@@ -1,6 +1,6 @@
 import { ref, onUnmounted } from 'vue';
-import { collection, query, orderBy, limit, onSnapshot } from 'firebase/firestore';
-import { db } from '../firebase/config';
+import { ref as dbRef, query, orderByChild, limitToLast, onValue } from 'firebase/database';
+import { rtdb } from '../firebase/config.js'; // ← muda para rtdb
 
 export function useWeatherData(collectionName) {
   const data = ref([]);
@@ -10,20 +10,43 @@ export function useWeatherData(collectionName) {
 
   const fetchData = () => {
     try {
-      const collectionRef = collection(db, collectionName);
-      const q = query(collectionRef, orderBy('timestamp', 'desc'), limit(50));
+      // Realtime Database: referência ao caminho específico
+      const collectionRef = dbRef(rtdb, `${collectionName}/leituras`);
       
-      unsubscribe = onSnapshot(q, 
+      // No Realtime Database, a consulta é diferente
+      // Primeiro, verifica se existe o nó
+      unsubscribe = onValue(collectionRef, 
         (snapshot) => {
           const items = [];
-          snapshot.forEach((doc) => {
-            items.push({
-              id: doc.id,
-              ...doc.data(),
-              timestamp: doc.data().timestamp?.toDate?.() || new Date(doc.data().timestamp)
+          
+          if (snapshot.exists()) {
+            const dados = snapshot.val();
+            
+            // Converte o objeto para array
+            Object.keys(dados).forEach((key) => {
+              const item = dados[key];
+              items.push({
+                id: key,
+                ...item,
+                // Realtime não tem timestamp automático, converte se existir
+                timestamp: item.timestamp ? new Date(item.timestamp) : new Date()
+              });
             });
-          });
-          data.value = items;
+            
+            // Ordena por timestamp decrescente (mais recente primeiro)
+            items.sort((a, b) => {
+              const timeA = a.timestamp?.getTime() || 0;
+              const timeB = b.timestamp?.getTime() || 0;
+              return timeB - timeA;
+            });
+            
+            // Limita a 50 itens
+            data.value = items.slice(0, 50);
+          } else {
+            console.log(`⚠️ Nenhum dado encontrado em ${collectionName}/leituras`);
+            data.value = [];
+          }
+          
           loading.value = false;
           error.value = null;
         },
@@ -34,6 +57,7 @@ export function useWeatherData(collectionName) {
         }
       );
     } catch (err) {
+      console.error(`Erro ao configurar listener da ${collectionName}:`, err);
       error.value = err.message;
       loading.value = false;
     }
@@ -51,7 +75,8 @@ export function useWeatherData(collectionName) {
 
   onUnmounted(() => {
     if (unsubscribe) {
-      unsubscribe();
+      unsubscribe(); // Remove o listener
+      console.log(`🧹 Listener removido para ${collectionName}`);
     }
   });
 

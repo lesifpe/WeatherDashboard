@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app'
-import { getFirestore } from 'firebase/firestore'
+//import { getFirestore } from 'firebase/firestore'
 import { getDatabase } from 'firebase/database'
 
 // 🔥 Validação do ENV (evita erro silencioso)
@@ -9,7 +9,8 @@ const requiredEnv = [
   'VITE_FIREBASE_PROJECT_ID',
   'VITE_FIREBASE_STORAGE_BUCKET',
   'VITE_FIREBASE_MESSAGING_SENDER_ID',
-  'VITE_FIREBASE_APP_ID'
+  'VITE_FIREBASE_APP_ID',
+  'VITE_FIREBASE_DATABASE_URL'
 ]
 
 // Verifica se alguma variável está faltando
@@ -31,12 +32,12 @@ const firebaseConfig = {
 
 // 🔥 Inicialização segura
 let app
-let db
+//let db
 let rtdb
 
 try {
   app = initializeApp(firebaseConfig)
-  db = getFirestore(app)
+  //db = getFirestore(app)
   rtdb = getDatabase(app)
 
   console.log('✅ Firebase conectado com sucesso')
@@ -44,4 +45,5 @@ try {
   console.error('❌ Erro ao inicializar Firebase:', error)
 }
 
-export { db, rtdb }
+//export { db, rtdb }
+export { rtdb }

@@ -1,4 +1,4 @@
-<!-- src/components/Dashboard.vue -->
+<!-- src/components/Dashboard.vue (Versão 2 - Melhor) -->
 <template>
   <div class="dashboard-container">
     <div v-if="loading" class="loading-container">
@@ -34,7 +34,8 @@
 <script setup>
 import { ref, watch, onUnmounted } from 'vue'
 import EquipeCard from './EquipeCard.vue'
-import { useWeatherData } from '../composables/useWeatherData'
+import { rtdb } from '../firebase/config.js'
+import { ref as dbRef, onValue } from 'firebase/database'
 
 const props = defineProps({
   selectedTeam: {
@@ -46,18 +47,13 @@ const props = defineProps({
 const weatherData = ref([])
 const loading = ref(false)
 const error = ref(null)
-let currentUnsubscribe = null
-let currentCheckInterval = null
+let unsubscribe = null
 
 const loadTeamData = () => {
-  // Limpar dados anteriores
-  if (currentUnsubscribe) {
-    currentUnsubscribe()
-    currentUnsubscribe = null
-  }
-  if (currentCheckInterval) {
-    clearInterval(currentCheckInterval)
-    currentCheckInterval = null
+  // Limpar inscrição anterior
+  if (unsubscribe) {
+    unsubscribe()
+    unsubscribe = null
   }
   
   if (!props.selectedTeam || !props.selectedTeam.collection) {
@@ -68,47 +64,65 @@ const loadTeamData = () => {
   
   loading.value = true
   error.value = null
-  weatherData.value = []
   
-  const { data, loading: dataLoading, error: dataError } = useWeatherData(props.selectedTeam.collection)
+  // Conexão direta com Realtime Database
+  const path = `${props.selectedTeam.collection}/leituras`
+  const leiturasRef = dbRef(rtdb, path)
   
-  const checkLoading = () => {
-    if (!dataLoading.value) {
-      if (dataError.value) {
-        error.value = dataError.value
-        weatherData.value = []
-      } else if (data.value && data.value.length > 0) {
-        weatherData.value = data.value
-        error.value = null
-      } else {
-        weatherData.value = []
-      }
-      loading.value = false
+  unsubscribe = onValue(leiturasRef, (snapshot) => {
+    const items = []
+    
+    if (snapshot.exists()) {
+      const dados = snapshot.val()
       
-      if (currentCheckInterval) {
-        clearInterval(currentCheckInterval)
-        currentCheckInterval = null
-      }
+      Object.keys(dados).forEach((key) => {
+        const item = dados[key]
+        items.push({
+          id: key,
+          ...item,
+          timestamp: item.timestamp ? new Date(item.timestamp) : new Date()
+        })
+      })
+      
+      // Ordenar por timestamp (mais recente primeiro)
+      items.sort((a, b) => {
+        const timeA = a.timestamp?.getTime() || 0
+        const timeB = b.timestamp?.getTime() || 0
+        return timeB - timeA
+      })
+      
+      weatherData.value = items.slice(0, 50) // Últimas 50 leituras
+      error.value = null
+    } else {
+      weatherData.value = []
+      console.log(`ℹ️ Nenhum dado encontrado em ${path}`)
     }
-  }
-  
-  checkLoading()
-  currentCheckInterval = setInterval(checkLoading, 100)
-  currentUnsubscribe = () => {
-    if (currentCheckInterval) clearInterval(currentCheckInterval)
-  }
+    
+    loading.value = false
+  }, (err) => {
+    console.error(`❌ Erro ao carregar ${props.selectedTeam.collection}:`, err)
+    error.value = err.message
+    weatherData.value = []
+    loading.value = false
+  })
 }
 
-onUnmounted(() => {
-  if (currentUnsubscribe) currentUnsubscribe()
-})
-
+// Quando a equipe mudar, recarrega os dados
 watch(() => props.selectedTeam, () => {
   loadTeamData()
-}, { immediate: true, deep: true })
+}, { immediate: true })
+
+// Limpar ao desmontar
+onUnmounted(() => {
+  if (unsubscribe) {
+    unsubscribe()
+    console.log('🧹 Listener removido')
+  }
+})
 </script>
 
 <style scoped>
+/* Seu CSS existente aqui */
 .dashboard-container {
   background: rgba(4, 16, 35, 0.4);
   backdrop-filter: blur(4px);

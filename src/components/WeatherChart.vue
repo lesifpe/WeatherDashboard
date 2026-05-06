@@ -32,7 +32,7 @@ const getChartData = () => {
     backgroundColor = '#00ff9f20'
   } else if (props.chartType === 'climate') {
     datasetLabel = 'Temperatura (°C)'
-    datasetData = props.data.map(d => d.temperatura ?? d.temperature ?? 0)
+    datasetData = props.data.map(d => d.dht_temperatura ?? d.temperatura ?? d.temperature ?? 0)
     borderColor = '#ff6b35'
     backgroundColor = '#ff6b3520'
   }
