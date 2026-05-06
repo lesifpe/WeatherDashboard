@@ -13,6 +13,7 @@
     "@vueuse/core": "^14.2.1",
     "chart.js": "^4.5.1",
     "firebase": "^12.12.1",
+    "firebase-tools": "^15.16.0",
     "vue": "^3.5.32",
     "vue-chartjs": "^5.3.3"
   },
