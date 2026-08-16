@@ -3,7 +3,7 @@
     <Navbar />
     
     <main>
-      <HomeView />
+      <router-view />
     </main>
     
     <Footer />
@@ -13,5 +13,4 @@
 <script setup>
 import Navbar from './components/ui/Navbar.vue'
 import Footer from './components/ui/Footer.vue'
-import HomeView from './view/HomeView.vue'
 </script>

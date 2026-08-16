@@ -1,0 +1,33 @@
+.sobre-page {
+  max-width: 1000px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+.sobre-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+.sobre-header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+.sobre-header p {
+  color: #6b7280;
+  font-size: 1.1rem;
+}
+.sobre-secao {
+  padding: 2.5rem;
+  border-radius: 16px;
+  margin-bottom: 2rem;
+  line-height: 1.7;
+  color: #4b5563;
+}
+.sobre-secao h2 {
+  text-align: center;
+  color: #111827;
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+}
+.sobre-secao p {
+  margin-bottom: 1.2rem;
+}

@@ -1,13 +1,17 @@
 <template>
   <nav class="navbar">
     <div class="nav-logo">
-      <span class="text-gradient">📊</span>
-      <span class="text-gradient">Data Insights</span>
+      <img src="../../assets/data-insightsl-ogo.png" alt="Logo Data Insights" class="logo-img" />
+      <span class="texto-gradiente">Data Insights</span>
     </div>
     
     <ul class="nav-links">
-      <li><a href="#" class="active">Início</a></li>
+      <li><router-link to="/" active-class="active">Início</router-link></li>
+      <li><router-link to="/Sobre" active-class="active">Sobre</router-link></li>
+      <li><a href="#">Contato</a></li>
+      <li><a href="#">Projetos</a></li>
     </ul>
+    
     <button class="theme-toggle" aria-label="Alternar Tema">
       🌙
     </button>
