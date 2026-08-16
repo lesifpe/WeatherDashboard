@@ -21,7 +21,8 @@
   },
   "homepage": "https://github.com/lesifpe/WeatherDashboard#readme",
   "dependencies": {
-    "vue": "^3.5.40"
+    "vue": "^3.5.40",
+    "vue-router": "^4.6.4"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^6.0.8",

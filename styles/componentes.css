@@ -1,0 +1,33 @@
+.footer {
+  text-align: center;
+  padding: 2rem;
+  color: #9ca3af;
+  border-top: 1px solid #f3f4f6;
+  font-size: 0.9rem;
+}
+.status-conteiner {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 3rem;
+  flex-wrap: wrap; 
+}
+.status-card {
+  background: white;
+  padding: 1.5rem 2rem;
+  border-radius: 12px;
+  text-align: center;
+  flex: 1;
+  min-width: 200px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+.status-numero {
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 0 0 0.5rem 0;
+}
+.status-label {
+  color: #9ca3af;
+  font-size: 0.9rem;
+  margin: 0;
+}

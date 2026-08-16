@@ -2,7 +2,7 @@
   <section class="hero-section">
     <div class="hero-bg-glow"></div>
     
-    <h1 class="hero-titulo text-gradient">Data Insights</h1>
+    <h1 class="hero-titulo texto-gradiente">Data Insights</h1>
     
     <p class="hero-subtitulo">
       Uma plataforma open-source desenvolvida pelo <strong>LES — IFPE Recife</strong> para coletar,
