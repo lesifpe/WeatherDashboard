@@ -2,7 +2,7 @@
   "name": "weatherdashboard",
   "version": "1.0.0",
   "description": "Sistema de monitoramento meteorológico em tempo real baseado em **ESP32 + Firebase Realtime Database**, com dashboard web moderno desenvolvido em **Vue 3 + Vite**.",
-  "main": "main.js",
+  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -15,11 +15,10 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
   "bugs": {
     "url": "https://github.com/lesifpe/WeatherDashboard/issues"
   },
-  "homepage": "https://github.com/lesifpe/WeatherDashboard#readme",
+  "homepage": "https://lesifpe.github.io/WeatherDashboard/",
   "dependencies": {
     "vue": "^3.5.40",
     "vue-router": "^4.6.4"
