@@ -1,24 +1,16 @@
 <template>
-  <div class="layoutPrincipal">
-    <header>
-      <h1>Data Insights</h1>
-    </header>
+  <div class="layout-principal">
+    <Navbar />
     
     <main>
-      <!-- Onde as páginas da pasta view serão exibidas -->
-      <HomeView />
+      <router-view />
     </main>
+    
+    <Footer />
   </div>
 </template>
 
 <script setup>
-import HomeView from './view/HomeView.vue'
+import Navbar from './components/ui/Navbar.vue'
+import Footer from './components/ui/Footer.vue'
 </script>
-
-<style scoped>
-.layout-principal {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
-}
-</style>

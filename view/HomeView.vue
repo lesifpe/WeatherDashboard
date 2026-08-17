@@ -1,11 +1,30 @@
 <template>
-  <section>
-    <h2>Visão Geral</h2>
-    <p>Projeto Weather Dashboard</p>
-    <WeatherCard />
+  <section class="hero-section">
+    <div class="hero-bg-glow"></div>
+    
+    <h1 class="hero-titulo texto-gradiente">Data Insights</h1>
+    
+    <p class="hero-subtitulo">
+      Uma plataforma open-source desenvolvida pelo <strong>LES — IFPE Recife</strong> para coletar,
+      integrar e visualizar dados de projetos acadêmicos e de pesquisa, de forma centralizada e acessível.
+    </p>
+    
+    <p class="hero-descricao">
+      Conectamos sensores IoT, APIs e bases de dados heterogêneas num único pipeline —
+      transformando dados brutos em insights claros e dashboards interativos.
+    </p>
+    
+    <div class="hero-botoes">
+      <a href="https://lesifpe.com.br/" target="_blank" rel="noopener noreferrer" class="bto-primario">
+        Conheça o LES <span>&rarr;</span>
+      </a>
+      <button class="bto-secondario">
+        Ver Projetos
+      </button>
+    </div>
   </section>
 </template>
 
 <script setup>
-import WeatherCard from '../components/widgets/WeatherCard.vue'
+// Sem nada por enquanto
 </script>

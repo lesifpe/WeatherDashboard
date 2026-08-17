@@ -9,12 +9,3 @@
 <script setup>
 // Lógica do card vai ficar aqui futuramente
 </script>
-
-<style scoped>
-.card {
-  border: 1px solid #ccc;
-  padding: 15px;
-  border-radius: 8px;
-  background-color: #f9f9f9;
-}
-</style>
