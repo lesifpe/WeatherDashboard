@@ -1,0 +1,82 @@
+.contato-page {
+    max-width: 1000px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+    color: #f9fafb;
+    
+}
+
+.card {
+    padding: 2.5rem;
+    border-radius: 16px;
+    margin-bottom: 2rem;
+    line-height: 1.7;
+}
+
+.cards{
+    display: flex;
+    align-items: flex-start
+}
+
+.contato-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.formulario-contato {
+    background-color: #ffffff;
+    border: 1px solid #eeefef;
+}
+
+.formulario-contato label{
+    color: black;
+}
+
+.formulario-contato input{
+    width: 100%;
+}
+
+.formulario-contato h3 {
+  text-align: center;
+  color: black;
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+}
+
+.funcionamento {
+    background-color: #ebecfb;
+    border: 1px solid #d5e0fb;
+
+}
+
+.cards-direita{
+    padding-left: 5%;
+}
+
+.requisitos {
+    background-color: #ffffff;
+    border: 1px solid #eeefef;
+}
+
+.nota {
+    background-color: #faeae2;
+    border: 1px solid #f9e4d6;
+}
+
+h3{
+    color: black;
+}
+
+p{
+    color: rgb(103, 102, 102);
+}
+
+h1{
+    font-size:300%;
+}
+
+#subtitulo{
+    font-size: 120%;
+    color: rgb(103, 102, 102);
+}
+

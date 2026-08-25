@@ -13,9 +13,9 @@
             <input type = "text" placeholder = "Nome do seu projeto" id = "nomeProjeto" v-model="nomeProjeto"><br>
             
             <label for="descricao">Descrição do projeto</label><br>
-            <textarea rows="8" cols = "20" placeholder="Descreva seu projeto, os dados que você gostaria de visualizar e qualquer informação relevante..." id = "descricao" v-model="descricao"></textarea><br>
+            <textarea rows="8" cols = "50" placeholder="Descreva seu projeto, os dados que você gostaria de visualizar e qualquer informação relevante..." id = "descricao" v-model="descricao"></textarea><br>
 
-            <button type = "submit">Enviar solicitação</button>
+            <button type = "submit" class="bto-primario">Enviar solicitação</button>
         </form>
     </div>
 </template>
