@@ -8,7 +8,7 @@
     <ul class="nav-links">
       <li><router-link to="/" active-class="active">Início</router-link></li>
       <li><router-link to="/Sobre" active-class="active">Sobre</router-link></li>
-      <li><a href="#">Contato</a></li>
+      <li><router-link to="/Contato" active-class="active">Contato</router-link></li>
       <li><a href="#">Projetos</a></li>
     </ul>
     
