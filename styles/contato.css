@@ -30,10 +30,21 @@
 
 .formulario-contato label{
     color: black;
+    display: block;
 }
+
 
 .formulario-contato input{
     width: 100%;
+}
+
+.formulario-contato input, 
+.formulario-contato textarea{
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    border: 1px solid #e5e7eb; 
+    margin-bottom: 1rem;
+    font-family: inherit;
 }
 
 .formulario-contato h3 {
