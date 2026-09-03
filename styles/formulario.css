@@ -1,0 +1,51 @@
+
+.formulario-contato {
+    background-color: #ffffff;
+    border: 1px solid #eeefef;
+}
+
+.formulario-contato label{
+    color: black;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+
+.formulario-contato input{
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.formulario-contato input, 
+.formulario-contato textarea{
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    border: 1px solid #e5e7eb; 
+    margin-bottom: 1rem;
+    font-family: inherit;
+}
+
+.formulario-contato h3 {
+  text-align: center;
+  color: black;
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+}
+
+.form-img{
+    width: 20px;
+    height: 20px;
+}
+
+.formulario-contato button {
+    margin: 0 auto;
+    display: block;
+}
+
+.bto-primario {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
