@@ -31,3 +31,20 @@
 .sobre-secao p {
   margin-bottom: 1.2rem;
 }
+body.dark-mode .sobre-header p {
+  color: #9ca3af;
+}
+body.dark-mode .sobre-secao {
+  color: #cbd5e1;
+}
+body.dark-mode .sobre-secao h2 {
+  color: #f8fafc;
+}
+body.dark-mode .bg-light-blue {
+  background-color: rgba(59, 130, 246, 0.05);
+  border-color: rgba(59, 130, 246, 0.15);
+}
+body.dark-mode .bg-light-purple {
+  background-color: rgba(168, 85, 247, 0.05);
+  border-color: rgba(168, 85, 247, 0.15);
+}

@@ -79,4 +79,33 @@ h1{
     font-size: 120%;
     color: rgb(103, 102, 102);
 }
-
+body.dark-mode h1,
+body.dark-mode h3,
+body.dark-mode .formulario-contato h3,
+body.dark-mode .formulario-contato label {
+    color: #e2e8f0;
+}
+body.dark-mode p,
+body.dark-mode #subtitulo {
+    color: #9ca3af;
+}
+body.dark-mode .formulario-contato,
+body.dark-mode .requisitos {
+    background-color: #1e293b;
+    border-color: #334155;
+}
+body.dark-mode .formulario-contato input {
+    background-color: #0b1121;
+    border: 1px solid #334155;
+    color: #e2e8f0;
+    padding: 8px;
+    border-radius: 6px;
+}
+body.dark-mode .funcionamento {
+    background-color: rgba(59, 130, 246, 0.1); 
+    border-color: rgba(59, 130, 246, 0.2);
+}
+body.dark-mode .nota {
+    background-color: rgba(249, 115, 22, 0.1);
+    border-color: rgba(249, 115, 22, 0.2);
+}
