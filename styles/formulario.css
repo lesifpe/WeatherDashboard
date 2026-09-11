@@ -24,6 +24,7 @@
     border: 1px solid #e5e7eb; 
     margin-bottom: 1rem;
     font-family: inherit;
+    resize: none;
 }
 
 .formulario-contato h3 {

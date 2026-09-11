@@ -13,21 +13,21 @@
             <div class = "cards-direita">
                 <article class = "card funcionamento">
                     <h3>Como funciona?</h3>
-                    <h3><span class="numero">1</span>   Envie sua solicitação</h3>
+                    <h3><span class="numero">1</span>    Envie sua solicitação</h3>
                     <p>Preencha o formulário com informações sobre seu projeto e os dados que deseja visualizar.</p>
                     
-                    <h3><span class="numero">2</span>   Análise da Equipe LES</h3>
+                    <h3><span class="numero">2</span>    Análise da Equipe LES</h3>
                     <p>Nossa equipe avaliará a viabilidade técnica e o alinhamento com os objetivos da plataforma.</p>
-                    <h3><span class="numero">3</span>   Implementação</h3>
+                    <h3><span class="numero">3</span>    Implementação</h3>
                     <p>Após aprovação, trabalharemos na integração dos dados e criação do dashboard personalizado.</p>
                 </article>
 
                 <article class="card requisitos">
                     <h3>Requisitos</h3>
                     <p><img src="../assets/check_green.png" alt ="Icone check" class = "check-img"> Dados estruturados e organizados</p>
-                    <p><img src="../assets/check_green.png" alt ="Icone check" class = "check-img">Relevância acadêmica ou institucional</p>
-                    <p><img src="../assets/check_green.png" alt ="Icone check" class = "check-img">Permissão para uso e visualização dos dados</p>
-                    <p><img src="../assets/check_green.png" alt ="Icone check" class = "check-img">Disponibilidade para colaboração técnica</p>
+                    <p><img src="../assets/check_green.png" alt ="Icone check" class = "check-img"> Relevância acadêmica ou institucional</p>
+                    <p><img src="../assets/check_green.png" alt ="Icone check" class = "check-img"> Permissão para uso e visualização dos dados</p>
+                    <p><img src="../assets/check_green.png" alt ="Icone check" class = "check-img"> Disponibilidade para colaboração técnica</p>
                 </article>
 
                 <article class = "card nota">
