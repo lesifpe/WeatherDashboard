@@ -16,7 +16,7 @@
     
     <div class="hero-botoes">
       <a href="https://lesifpe.com.br/" target="_blank" rel="noopener noreferrer" class="bto-primario">
-        Conheça o LES <span>&rarr;</span>
+        Conheça a LES <span>&rarr;</span>
       </a>
       
       <div class="dropdown-container">
