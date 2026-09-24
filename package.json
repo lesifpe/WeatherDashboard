@@ -21,6 +21,7 @@
   "homepage": "https://lesifpe.github.io/WeatherDashboard/",
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
+    "chart.js": "^4.5.1",
     "vue": "^3.5.40",
     "vue-router": "^4.6.4"
   },
