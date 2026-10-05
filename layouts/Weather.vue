@@ -121,21 +121,30 @@ const firebaseData = ref({
   margin-bottom: 2rem;
 }
 .kpi-card {
-  background-color: rgba(160, 160, 160, 0.4);
+  background-color: rgba(128, 128, 128, 0.15);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(128, 128, 128, 0.25);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
   border-radius: 12px;
   padding: 1.5rem;
   display: flex;
   align-items: center;
   gap: 1rem;
-  border: none;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  color: inherit;
 }
 .kpi-card.outline {
-  background-color: rgba(160, 160, 160, 0.05);
+  background-color: rgba(128, 128, 128, 0.05); 
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(128, 128, 128, 0.2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border-radius: 12px;
+  padding: 1.5rem;
+  display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 0.8rem;
-  border: 1px solid rgba(128, 128, 128, 0.1);
 }
 .kpi-label-secundary {
   color: rgba(128, 128, 128, 0.9);
@@ -188,26 +197,53 @@ const firebaseData = ref({
   border-radius: 6px;
 }
 .chart-section {
-  background-color: rgba(160, 160, 160, 0.25);
+  background-color: rgba(128, 128, 128, 0.12);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(128, 128, 128, 0.25);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
   border-radius: 12px;
   padding: 1.5rem;
-  border: 1px solid rgba(128, 128, 128, 0.1);
   margin-bottom: 2rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  color: inherit;
 }
 .chart-section h3 {
   margin-top: 0;
   margin-bottom: 1.5rem;
   color: inherit;
 }
+.aiotads-container, .weather-container {
+  padding: 2rem 2rem 4rem 2rem;
+  color: inherit;
+  font-family: inherit;
+}
 .bottom-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1.5rem;
+  margin-bottom: 3rem;
 }
 @media (max-width: 768px) {
   .bottom-grid {
     grid-template-columns: 1fr;
   }
+}
+.dropdown-period {
+  background: rgba(128, 128, 128, 0.15);
+  backdrop-filter: blur(4px);
+  color: inherit;
+  padding: 0.5rem 1rem;
+  border: 1px solid rgba(128, 128, 128, 0.25);
+  border-radius: 8px;
+  outline: none;
+}
+.chart-toggles button {
+  background: rgba(128, 128, 128, 0.05);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(128, 128, 128, 0.25);
+  color: inherit;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: all 0.2s;
 }
 </style>
