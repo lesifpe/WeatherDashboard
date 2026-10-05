@@ -44,6 +44,31 @@
         <CardEstatistica numero="4+" rotulo="Projetos Ativos" />
         <CardEstatistica numero="25+" rotulo="Colaboradores" />
       </div>
+      <div class="equipe-card">
+        <h3 class="equipe-titulo">Equipe do Projeto</h3>
+        <div class="equipe-grid">
+          <div class="membro-card">
+            <span class="membro-nome">Ilian Solano Bezerra da Silva:</span>
+            <span class="membro-cargo"> Idealizador, Presidente da LES e Criador do protótipo inicial</span>
+          </div>
+          <div class="membro-card">
+            <span class="membro-nome">Yuri Santos de Oliveira:</span>
+            <span class="membro-cargo"> Idealizador, Vice-presidente da LES e Criador do protótipo inicial</span>
+          </div>
+          <div class="membro-card">
+            <span class="membro-nome">Victor Soares Couto da Silva:</span>
+            <span class="membro-cargo"> Líder do Projeto e Desenvolvedor</span>
+          </div>
+          <div class="membro-card">
+            <span class="membro-nome">Márcio Luan Ferreira Barros:</span>
+            <span class="membro-cargo"> Desenvolvedor</span>
+          </div>
+          <div class="membro-card">
+            <span class="membro-nome">Ian Elton Pereira da Silva:</span>
+            <span class="membro-cargo"> Desenvolvedor</span>
+          </div>
+        </div>
+      </div>
     </article>
   </section>
 </template>

@@ -1,5 +1,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
+import iconeSol from '../../assets/sunIcon.png';
+import iconeLua from '../../assets/moonIcon.png';
 const menuAberto = ref(false)
 
 const isDark = ref(false)
@@ -61,7 +63,7 @@ const alternarTema = () => {
     </ul>
     
     <button @click="alternarTema" class="theme-toggle" aria-label="Alternar Tema">
-      {{ isDark ? '☀️' : '🌙' }}
-    </button>
+  <img :src="isDark ? iconeSol : iconeLua" alt="Alternar Tema" class="theme-icon" />
+</button>
   </nav>
 </template>

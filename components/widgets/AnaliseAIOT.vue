@@ -22,12 +22,17 @@ const analiseDeDados = ref([
 
 <style scoped>
 .analysis-section {
-  background-color: var(--bg-card, rgba(160, 160, 160, 0.25)); /* Cinza adaptável para o tema claro[cite: 10] */
+  background-color: rgba(128, 128, 128, 0.12);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(128, 128, 128, 0.25);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
   border-radius: 12px;
   padding: 1.5rem;
-  border: 1px solid rgba(128, 128, 128, 0.1);
-  height: 100%;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: inherit;
 }
 h3 {
   margin-top: 0;
@@ -43,7 +48,7 @@ h3 {
   margin-bottom: 1.25rem;
   line-height: 1.6;
   color: inherit;
-  opacity: 0.85; /* Mantém a legibilidade em fundo claro e escuro */
+  opacity: 0.85;
 }
 .analysis-list strong {
   font-weight: 600;
