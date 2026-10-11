@@ -1,7 +1,7 @@
 {
-  "name": "weatherdashboard",
+  "name": "wdata-insights",
   "version": "1.0.0",
-  "description": "Sistema de monitoramento meteorológico em tempo real baseado em **ESP32 + Firebase Realtime Database**, com dashboard web moderno desenvolvido em **Vue 3 + Vite**.",
+  "description": "Sistema de monitoramento em tempo real baseado em **ESP32 + Firebase Realtime Database**, com dashboard web moderno desenvolvido em **Vue 3 + Vite**.",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -10,15 +10,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/lesifpe/WeatherDashboard.git"
+    "url": "git+https://github.com/lesifpe/data-insights.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/lesifpe/WeatherDashboard/issues"
+    "url": "https://github.com/lesifpe/data-insights/issues"
   },
-  "homepage": "https://lesifpe.github.io/WeatherDashboard/",
+  "homepage": "https://lesifpe.github.io/data-insights/",
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
     "chart.js": "^4.5.1",
