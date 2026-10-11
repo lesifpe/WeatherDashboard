@@ -1,5 +1,5 @@
 {
-  "name": "wdata-insights",
+  "name": "data-insights",
   "version": "1.0.0",
   "description": "Sistema de monitoramento em tempo real baseado em **ESP32 + Firebase Realtime Database**, com dashboard web moderno desenvolvido em **Vue 3 + Vite**.",
   "type": "module",
